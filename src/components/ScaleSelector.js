@@ -8,12 +8,14 @@ const categories = Object.entries(scales).reduce((accumulator, curr) => {
 }, { light: [], dark: [] })
 
 const ScalesSelector = () => {
+    const { dispatch } = useAppContext()
+
     return (
-        <select>
+        <select onChange={e => dispatch({ type: 'CHANGE_SCALE', payload: e.target.value })}>
             {Object.entries(categories).map(cat => {
                 const [categoryName, scaleNames] = cat
                 return (
-                    <optgroup label={categoryName}>
+                    <optgroup label={categoryName} key={categoryName}>
                         {scaleNames.map(name => <option value={name} key={name} label={name}></option>)}
                     </optgroup>
                 )
