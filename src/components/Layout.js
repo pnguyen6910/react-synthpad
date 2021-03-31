@@ -11,7 +11,11 @@ const Background = styled.div`
 const Layout = ({ children }) => {
     const { state } = useAppContext()
 
-    return <Background theme={state.theme}>{children}</Background>
+    return <Background theme={state.theme}>
+        <div>
+            {children}
+        </div>
+    </Background>
 }
 
 export default Layout
