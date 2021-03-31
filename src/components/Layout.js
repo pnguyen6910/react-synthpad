@@ -8,7 +8,7 @@ const Background = styled.div`
     background: ${props => props.theme === 'light' ? '#bbb' : '#1F2041'};
 `
 
-const Layout = ({ children }) => {
+const Layout = ({ children, controls }) => {
     const { state } = useAppContext()
 
     return <Background theme={state.theme}>
