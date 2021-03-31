@@ -1,9 +1,9 @@
 import { AppProvider } from "./context"
-
+import ScalesSelector from './components/ScaleSelector'
 function App() {
   return (
     <AppProvider>
-      <div>Synth App</div>
+      <ScalesSelector />
     </AppProvider>
   );
 }
