@@ -1,9 +1,13 @@
 import { AppProvider } from "./context"
 import ScalesSelector from './components/ScaleSelector'
+import Layout from './components/Layout'
+
 function App() {
   return (
     <AppProvider>
-      <ScalesSelector />
+      <Layout>
+        <ScalesSelector />
+      </Layout>
     </AppProvider>
   );
 }
