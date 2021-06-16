@@ -1,15 +1,18 @@
-import { AppProvider } from "./context"
-import ScalesSelector from './components/ScaleSelector'
-import Layout from './components/Layout'
-import Synth from './components/Synth'
-import Volume from './components/Volume'
+import { AppProvider } from './context'
+import ScaleSelector from './components/scale-selector'
+import Layout from './components/layout'
+import Synth from './components/synth'
+import Volume from './components/volume'
 
 function App() {
   return (
     <AppProvider>
-      <Layout>
-        <ScalesSelector />
-        <Volume />
+      <Layout controls={(
+        <>
+          <ScaleSelector />
+          <Volume />
+        </>
+      )}>
         <Synth />
       </Layout>
     </AppProvider>

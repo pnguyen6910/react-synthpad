@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import styled from 'styled-components'
 import { useAppContext } from '../context'
 import { DuoSynth, FMSynth } from 'tone'
-import Pad from './Pad.js'
+import Pad from './pad'
 
 const PadGrid = styled.div`
   display: grid;
@@ -11,37 +11,37 @@ const PadGrid = styled.div`
 `
 
 const Synth = () => {
-    const { state } = useAppContext()
-    console.log(state)
+  const { state } = useAppContext()
 
-    const synth = state.theme === 'light'
-        ? new FMSynth()
-        : new DuoSynth()
+  const synth = state.theme === 'light'
+    ? new FMSynth()
+    : new DuoSynth()
 
-    synth.volume.value = state.volume
-    synth.toDestination()
+  synth.volume.value = state.volume
 
-    useEffect(() => {
-        window.addEventListener('keydown', handleKeydown)
-        return () => window.removeEventListener('keydown', handleKeydown)
-    }, [])
+  synth.toDestination()
 
-    const handleKeydown = e => playSound(e.key)
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeydown)
+    return () => window.removeEventListener('keydown', handleKeydown)
+  }, [])
 
-    const playSound = letterPressed => {
-        const foundNote = state.notes.find(note => note.letter === letterPressed)
-        if (foundNote) {
-            synth.triggerAttackRelease(foundNote.note, '8n')
-        }
+  const handleKeydown = e => playSound(e.key)
+  
+  const playSound = letterPressed => {
+    const foundNote = state.notes.find(note => note.letter === letterPressed)
+    if (foundNote) {
+      synth.triggerAttackRelease(foundNote.note, '8n')
     }
-
-    return (
-        <PadGrid>
-            {state.notes.map(noteObj => (
-                <Pad {...noteObj} playSound={playSound} key={noteObj.letter} />
-            ))}
-        </PadGrid>
-    )
+  }
+  
+  return (
+    <PadGrid>
+      {state.notes.map(noteObj => (
+        <Pad {...noteObj} playSound={playSound} key={noteObj.letter} />
+      ))}
+    </PadGrid>
+  )
 }
 
 export default Synth
